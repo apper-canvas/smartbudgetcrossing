@@ -95,14 +95,10 @@ class CategoryService {
         console.error(response.message);
         throw new Error(response.message);
       }
-
-      if (response.results) {
+if (response.results) {
         const failed = response.results.filter(r => !r.success);
         if (failed.length > 0) {
           console.error(`Failed to create category:`, failed);
-          failed.forEach(record => {
-            if (record.message) throw new Error(record.message);
-          });
         }
         return response.results.find(r => r.success)?.data;
       }
