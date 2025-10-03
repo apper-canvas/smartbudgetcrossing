@@ -1,3 +1,5 @@
+import toast from 'react-hot-toast';
+
 class CategoryService {
   constructor() {
     const { ApperClient } = window.ApperSDK;
@@ -99,6 +101,17 @@ if (response.results) {
         const failed = response.results.filter(r => !r.success);
         if (failed.length > 0) {
           console.error(`Failed to create category:`, failed);
+          // Show specific field errors to user
+          failed.forEach(record => {
+            record.errors?.forEach(error => {
+              const fieldLabel = error.fieldLabel || 'Field';
+              const errorMsg = error.message || error;
+              toast.error(`${fieldLabel}: ${errorMsg}`);
+            });
+            if (record.message) {
+              throw new Error(record.message);
+            }
+          });
         }
         return response.results.find(r => r.success)?.data;
       }
