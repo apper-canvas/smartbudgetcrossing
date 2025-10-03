@@ -9,10 +9,11 @@ const Sidebar = ({ isOpen, onClose }) => {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const { logout } = useContext(AuthContext);
 
-  const menuItems = [
+const menuItems = [
     { icon: "LayoutDashboard", label: "Dashboard", path: "/" },
     { icon: "ArrowLeftRight", label: "Transactions", path: "/transactions" },
     { icon: "Wallet", label: "Budget", path: "/budget" },
+    { icon: "FolderKanban", label: "Categories", path: "/categories" },
     { icon: "Target", label: "Goals", path: "/goals" },
     { icon: "BarChart3", label: "Reports", path: "/reports" },
     { icon: "User", label: "Profile", path: "/profile" }
